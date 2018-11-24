@@ -26,12 +26,12 @@ export GOOGLE_APPLICATION_CREDENTIALS="gdg-cloudfest-keyfile.json"
 ```
 
 Windows cmd
-``` python
+``` bash
 set GOOGLE_APPLICATION_CREDENTIALS=gdg-cloudfest-keyfile.json
 ```
 
 Windows PowerShell
-``` python
+``` Powershell
 $env:GOOGLE_APPLICATION_CREDENTIALS="gdg-cloudfest-keyfile.json"
 ```
 
