@@ -1,22 +1,21 @@
 from google.cloud import vision, language
 from PIL import Image, ImageDraw
-import subprocess
+
+import os
+import io
 
 # Instantiate clients for Cloud Vision and Cloud Natural Language
 vision_client = vision.ImageAnnotatorClient()
 language_client = language.LanguageServiceClient()
 
-# Download the receipt image
-subprocess.call('wget https://i.imgur.com/9tdZuJj.jpg'.split(' '))
-
 
 # Open image with PIL to draw on it
-def mask_receipt(img_path):
-    source_img = Image.open(img_path)
+def mask_receipt(path):
+    source_img = Image.open(path)
     draw = ImageDraw.Draw(source_img)
 
     # Call the vision API to extract text from the image
-    with open(img_path, 'rb') as f:
+    with io.open(path, 'rb') as f:
         image = vision.types.Image(content=f.read())
 
     imageresponse = vision_client.document_text_detection(image=image)
@@ -37,7 +36,9 @@ def mask_receipt(img_path):
                 v = annotation.bounding_poly.vertices
                 box = [v[0].x, v[0].y, v[2].x, v[2].y]
                 draw.rectangle(box, fill='black')
+    
+    base_path = os.path.basename(path)
+    anon_path = os.path.splitext(base_path)[0]
+    source_img.save(os.path.join("anon_images", "%s.jpg") % anon_path, "JPEG")
 
-    source_img.save(img_path + '_anon', "JPEG")
-
-mask_receipt('./9tdZuJj.jpg')
+mask_receipt(os.path.join("images", "receipt.jpg"))

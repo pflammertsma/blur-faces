@@ -1,12 +1,14 @@
 from google.cloud import vision
 from PIL import Image, ImageDraw
-import io
 
-def detect_document(path):
+import io
+import os
+
+client = vision.ImageAnnotatorClient()
+
+def detect_license_plate(path):
     """Detects document features in an image."""
     
-    # Let's create an Image Annotator Client object on Google Cloud
-    client = vision.ImageAnnotatorClient()
 
     # We open the file and save its contents to the variable content
     with io.open(path, 'rb') as image_file:
@@ -25,6 +27,9 @@ def detect_document(path):
     # Use the document text detector to search for text in the image
     # Fortunatly for us, a licence plate is text!
     response = client.document_text_detection(image=image)
+    print("="*20)
+    print(response)
+    print("="*20)
 
     # The repsons contains all possible information the API was able to
     # gather from the image. A block represents a single piece of text it
@@ -38,6 +43,7 @@ def detect_document(path):
             # But more importantly: we need the bounding box around the object
             # so we can paint that rectangle black and obscure the license plate
             v = block.bounding_box.vertices
+            print('\nVertices:\n{}'.format(v))
 
             # PIL only needs the top left and bottom right corners of the 
             # rectangle to draw it properly. These are the 1st and 3rd items
@@ -50,7 +56,9 @@ def detect_document(path):
             draw.rectangle(box, fill='black')
 
     # Save the image with the black bars on it
-    source_img.save(path + '_anon', "JPEG")
+    base_path = os.path.basename(path)
+    anon_path = os.path.splitext(base_path)[0]
+    source_img.save(os.path.join("anon_images", "%s.jpg") % anon_path, "JPEG")
 
 
-detect_document('images/car.jpg')
+detect_license_plate(os.path.join("images", "car.jpg"))

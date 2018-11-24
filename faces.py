@@ -4,9 +4,10 @@ from PIL import Image, ImageDraw
 import io
 import os
 
+client = vision.ImageAnnotatorClient()
+
 def mask_faces(path):
     """Detects faces in an image."""
-    client = vision.ImageAnnotatorClient()
 
     with io.open(path, 'rb') as image_file:
         content = image_file.read()
