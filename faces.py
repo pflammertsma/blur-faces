@@ -31,4 +31,4 @@ def mask_faces(path):
     anon_path = os.path.splitext(base_path)[0]
     source_img.save(os.path.join("anon_images", "%s.jpg") % anon_path, "JPEG")
 
-mask_faces(os.path.join("images", "faces.jpg"))
+mask_faces(os.path.join("images", "car_and_person.jpg"))

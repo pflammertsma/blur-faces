@@ -53,4 +53,4 @@ def detect_document(path):
     source_img.save(path + '_anon', "JPEG")
 
 
-detect_document('car.jpg')
+detect_document('images/car.jpg')
