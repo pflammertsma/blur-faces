@@ -4,7 +4,7 @@
 To clone the repo, open a terminal/cmd window and cd into an appropriate folder. Then run the git clone command:
 
 ```
-git clone git@bitbucket.org:ml6team/gdg-cloudfest.git
+git clone https://github.com/PyCod/gdg-cloudfest.git
 ```
 
 # Step 2: Install packages

@@ -33,7 +33,7 @@ def detect_document(path):
         for block in page.blocks:
             # For each block of text we can show the confidence the algortihtm
             # has in that particular block
-            print('\nBlock confidence: ***REMOVED******REMOVED***\n'.format(block.confidence))
+            print('\nBlock confidence: {}\n'.format(block.confidence))
 
             # But more importantly: we need the bounding box around the object
             # so we can paint that rectangle black and obscure the license plate
