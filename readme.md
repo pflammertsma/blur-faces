@@ -10,9 +10,8 @@ git clone git@bitbucket.org:ml6team/gdg-cloudfest.git
 #Step 2: Install packages
 
 To install the necessairy packages, cd into the gdg-cloudfest folder and run:
-
 ```
-pip install --upgrade google-cloud-vision google-cloud-language Pillow
+pip install -r requirements.txt
 ```
 
 #Step 3: Set keyfile in environment
