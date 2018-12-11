@@ -34,3 +34,11 @@ $env:GOOGLE_APPLICATION_CREDENTIALS="gdg-cloudfest-keyfile.json"
     from faces import joyous_faces
     
     joyous_faces(path=os.path.join("images_input", "gdg_cloudfest.jpg"))
+
+## Example
+
+Input:  
+<img src="https://raw.githubusercontent.com/pflammertsma/joyous-faces/master/images_input/gdg_cloudfest.jpg" width="400" />
+
+Output:  
+<img src="https://raw.githubusercontent.com/pflammertsma/joyous-faces/master/images_output/gdg_cloudfest-pop.jpg" width="400" />  
