@@ -1,20 +1,13 @@
+# Joyous-Faces
 
-# Step 1: Clone the repo
+Joyous-Faces is a simple implementation of Google Cloud's AutoML Vision API to extract faces and measure the joyfulness in a photo.
 
-To clone the repo, open a terminal/cmd window and cd into an appropriate folder. Then run the git clone command:
-
-```
-git clone https://github.com/PyCod/gdg-cloudfest.git
-```
-
-# Step 2: Install packages
+## Installation
 
 To install the necessairy packages, cd into the gdg-cloudfest folder and run:
 ```
 pip install -r requirements.txt
 ```
-
-# Step 3: Set keyfile in environment
 
 One more step, we need to set the right environment variable for the code to use.
 After the workshop, this keyfile will not work anymore.
@@ -34,4 +27,10 @@ Windows PowerShell
 $env:GOOGLE_APPLICATION_CREDENTIALS="gdg-cloudfest-keyfile.json"
 ```
 
-Have fun!
+## Execution
+
+`faces.py` defines `joyous_faces()`, which can be used to convert an image to an output outlining all faces and measuring the joyfulness factor. For instance:
+
+    from faces import joyous_faces
+    
+    joyous_faces(path=os.path.join("images_input", "gdg_cloudfest.jpg"))
