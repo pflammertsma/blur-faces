@@ -6,9 +6,9 @@ from google.cloud import vision
 
 client = vision.ImageAnnotatorClient()
 
-fontSize = 18
+fontSize = 24
 font = ImageFont.truetype("fonts/OpenSans-Bold.ttf", fontSize)
-fontTitle = ImageFont.truetype("fonts/OpenSans-Bold.ttf", 32)
+fontTitle = ImageFont.truetype("fonts/OpenSans-Bold.ttf", 50)
 
 def joyous_faces(path):
     """
@@ -32,6 +32,7 @@ def extract_faces(mode, path):
 
     process_img = Image.open(path)
     source_img = process_img.convert('RGBA')
+    process_img = process_img.convert('RGB')
     draw = ImageDraw.Draw(process_img)
     blur_img = source_img.filter(ImageFilter.GaussianBlur(25)).convert('RGBA')
     if mode=='pop':
@@ -72,17 +73,17 @@ def extract_faces(mode, path):
                 output_img.paste(region, (v[0].x - offset[0]/2, v[0].y - offset[1]/2), region)
 
             total_joy += face.joy_likelihood - face.anger_likelihood
-            if (face.joy_likelihood > 3):
-                expression = 'joy'
-            elif (face.sorrow_likelihood > 3):
-                expression = 'sorrow'
-            elif (face.anger_likelihood > 3):
-                expression = 'anger'
-            elif (face.surprise_likelihood > 3):
-                expression = 'surprise'
-            else:
-                expression = 'neutral'
+            expression = ('neutral', 0)
+            if (face.joy_likelihood > expression[1]):
+                expression = ('joy', face.joy_likelihood)
+            if (face.sorrow_likelihood > expression[1]):
+                expression = ('sorrow', face.sorrow_likelihood)
+            if (face.anger_likelihood > expression[1]):
+                expression = ('anger', face.anger_likelihood)
+            if (face.surprise_likelihood > expression[1]):
+                expression = ('surprise', face.surprise_likelihood)
 
+            expression = ('%s: %d' % (expression[0], expression[1]))
             expressions.append((box, expression))
 
             if mode=='pop':
