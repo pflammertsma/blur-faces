@@ -2,6 +2,10 @@
 
 Joyous-Faces is a simple implementation of Google Cloud's AutoML Vision API to extract faces and measure the joyfulness in a photo.
 
+## Prerequisite
+
+You will need a Google Cloud account with billing enabled to use Google's AutoML Vision API.
+
 ## Installation
 
 To install the necessairy packages, cd into the gdg-cloudfest folder and run:
@@ -9,8 +13,7 @@ To install the necessairy packages, cd into the gdg-cloudfest folder and run:
 pip install -r requirements.txt
 ```
 
-One more step, we need to set the right environment variable for the code to use.
-After the workshop, this keyfile will not work anymore.
+One more step, we need to set the right environment variable for the code to use. You will need to enable billing on your Google Cloud account and download the credentials json file.
 
 Linux and MacOS
 ``` python
