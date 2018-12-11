@@ -1,2 +1,4 @@
 .vscode
 response.json
+*.pyc
+.DS_Store
